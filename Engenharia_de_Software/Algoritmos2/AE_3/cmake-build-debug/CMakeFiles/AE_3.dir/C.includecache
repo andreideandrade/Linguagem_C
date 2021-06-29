@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Linguagem_C/Engenharia_de_Software/Algoritmos2/AE_3/main.c
+stdio.h
+-
+stdlib.h
+-
+time.h
+-
+conio.h
+-
+
