@@ -2,25 +2,78 @@
 #include <stdlib.h>
 #include <locale.h>
 
-int main() {
-    setlocale(LC_ALL, "Portuguese");
+/*  ---------------------------------------  VARIAVEIS   CONSTANTES -------------------------------------------------*/
+const char  INICIO[45] = "\nCadastre seus dados para ser atendido: \n",
+            CPF[10] = "\nCPF: ",
+            NOME[10] = "\nNOME: ",
+            SEXO[10] = "\nSEXO: ",
+            IDADE[10] = "\nIDADE: ";
 
-    printf("João cabeção\n");   // Teste da função locale
+/*  -------------------------------  VARIAVEIS DE ENTRADA DE DADOS DO PACIENTE -------------------------------------  */
+char    entCPF[200],
+        entNome[200],
+        entSexo[200],
+        entIdade[200];
 
-    system("pause");
+int cadastro(int ent)                                        // FUNÇÃO CADASTRO
+{
 
+    switch (ent) {
+        case 0:
+            printf(CPF);
+            scanf("%s", entCPF);
+            break;
+        case 1:
+            printf(NOME);
+            scanf("%s", entNome);
+            break;
+        case 2:
+            printf(SEXO);
+            scanf("%s", entSexo);
+            break;
+        case 3:
+            printf(IDADE);
+            scanf("%s", entIdade);
+            break;
+    }
+    return ent;
+}
+
+int limpa()                                                  // Mantem tela e cache limpos
+{
+    fflush(stdin);          // limpa cache
+    system("cls");      // limpa tela
     return 0;
 }
 
+int linha()                                                  // Imprime uma linha para formatação
+{
+    printf("\n");
+    for (int i = 0; i < 52; i++) {
+        printf("-");
+    }
+    printf("\n");
+    return  0;
+}
+
+int main() {
+    setlocale(LC_ALL, "Portuguese");                         //  FORMATA PADRÃO PORTUGUES
+
+    linha();
+
+    for (int cad = 0; cad < 4; cad++) {
+        printf(INICIO);
+        cadastro(cad);
+
+        limpa();
+    }
+    linha();
+
+    system("pause"); // MANTEM SISTEMA ABERTO ATÉ PRECIONAR QUALQUER TECLA
+    return 0;
+}
 /*     ----------------------------------------------------------------------------------------------------- */
-/*      Cadastro inicial do paciente
 
-- CPF
-- Nome
-- Sexo
-- Idade
-
- */
 /*     ----------------------------------------------------------------------------------------------------- */
 /*      Triagem para decidir para onde o paciente será direcionado
  *
