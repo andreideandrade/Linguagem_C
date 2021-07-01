@@ -9,7 +9,7 @@ int abreArquivo()
 	FILE *pont_arq;
 
 	//abrindo o arquivo
-	pont_arq = fopen("arquivo.txt", "a");
+	pont_arq = fopen("arquivo.txt", "w");
 
 	// fechando arquivo
 	fclose(pont_arq);
@@ -38,7 +38,7 @@ int abreEgrava()
 	//abrindo o arquivo com tipo de abertura w -> apaga tudo dentro do arquivo e reescreve
 	//abrindo o arquivo com tipo de abertura a  -> Escreve na frente do arquivo
 
-	pont_arq = fopen("arquivo_palavra.txt", "a");
+	pont_arq = fopen("arquivo.txt", "a");
 
 	//testando se o arquivo foi realmente criado
 	if(pont_arq == NULL)
@@ -62,6 +62,39 @@ int abreEgrava()
 	return 0;
 }
 
+/*  ---------------------------------- ESTA FUNÇÃO ABRE E GRAVA UMA FRASE NO ARQUIVO  ------------------------------  */
+int gravaFrase()
+{
+FILE *pont_arq;
+   int r;
+
+   pont_arq = fopen("arquivo.txt", "a");
+
+   //Testando a abertura do arquivo
+	if (pont_arq == NULL)
+	{
+		printf("Erro ao tentar abrir o arquivo!");
+		exit(1);
+	}
+
+	//Gravando strings no arquivo
+   r = fputs("Programando em Linguagem C.", pont_arq);
+
+   //Verificando se os dados foram gravados com sucesso
+   if( r == EOF)
+   {
+   	  printf("Erro ao tentar gravar os dados! \n");
+   }
+   else
+	   {
+	   	 printf("Dados gravados com sucesso. \n");
+	   }
+
+   //fechando o arquivo
+   fclose(pont_arq);
+   return 0;
+}
+
 /*  -------------------------- ESTA FUNÇÃO FAZ A LEITURA DE UM ARQUIVO E EXIBE NA TELA  ----------------------------  */
 int leituradeArquivo()
 {
@@ -69,7 +102,7 @@ int leituradeArquivo()
 	char texto_str[61];
 
 	//abrindo o arquivo_frase em modo "somente leitura"
-	pont_arq = fopen("arquivo_palavra.txt", "r");
+	pont_arq = fopen("arquivo.txt", "r");
 
 	//enquanto não for fim de arquivo o looping será executado
 	//e será impresso o texto
@@ -87,6 +120,7 @@ int main(void)
 {
     abreArquivo();              // Cria ou se já existe abre e fecha arquivo
     abreEgrava();               // Cria ou se já existe grava palavra em arquivo
+    gravaFrase();               // grava uma string inteira no arquivo
     leituradeArquivo();         // Faz a leitura de arquivos txt e exibe na tela
 
 /* ---------------------------------------   BANCADA DE TESTE    --------------------------------------------------   */
