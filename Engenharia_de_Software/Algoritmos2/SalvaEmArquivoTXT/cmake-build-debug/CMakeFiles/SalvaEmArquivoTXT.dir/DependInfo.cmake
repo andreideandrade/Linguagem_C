@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "C:/Linguagem_C/Engenharia_de_Software/Algoritmos2/SalvaEmArquivoTXT/main.c" "C:/Linguagem_C/Engenharia_de_Software/Algoritmos2/SalvaEmArquivoTXT/cmake-build-debug/CMakeFiles/SalvaEmArquivoTXT.dir/main.c.obj"
+  "/home/andrei/Linguagem_C/Engenharia_de_Software/Algoritmos2/SalvaEmArquivoTXT/main.c" "/home/andrei/Linguagem_C/Engenharia_de_Software/Algoritmos2/SalvaEmArquivoTXT/cmake-build-debug/CMakeFiles/SalvaEmArquivoTXT.dir/main.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

@@ -6,11 +6,9 @@
 
 #IncludeRegexTransform: 
 
-C:/Linguagem_C/Engenharia_de_Software/Algoritmos2/SalvaEmArquivoTXT/main.c
+/home/andrei/Linguagem_C/Engenharia_de_Software/Algoritmos2/SalvaEmArquivoTXT/main.c
 stdio.h
 -
 stdlib.h
--
-conio.h
 -
 

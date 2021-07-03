@@ -1,9 +1,7 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/SalvaEmArquivoTXT.dir/main.c.obj"
-  "SalvaEmArquivoTXT.exe"
-  "SalvaEmArquivoTXT.exe.manifest"
+  "CMakeFiles/SalvaEmArquivoTXT.dir/main.c.o"
+  "SalvaEmArquivoTXT"
   "SalvaEmArquivoTXT.pdb"
-  "libSalvaEmArquivoTXT.dll.a"
 )
 
 # Per-language clean rules from dependency scanning.

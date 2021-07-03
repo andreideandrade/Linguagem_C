@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <conio.h>
+//#include <conio.h>
 
 /*  ---------------------------------- ESTA FUNÇÃO ABRE E FECHA UM ARQUIVO  ----------------------------------------  */
 int abreArquivo()
@@ -23,7 +23,7 @@ else
      printf("O arquivo foi aberto com sucesso!");
    }
 
-	getch();
+	getchar();
 	//system("pause");
 	return(0);
 }
@@ -58,7 +58,7 @@ int abreEgrava()
 
 	printf("Dados gravados com sucesso!");
 
-	getch();
+	getchar();
 	return 0;
 }
 
@@ -112,7 +112,7 @@ int leituradeArquivo()
 	//fechando o arquivo
 	fclose(pont_arq);
 
-	getch();
+	getchar();
 	return(0);
 }
 
