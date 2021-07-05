@@ -1,3 +1,3 @@
-C:/Linguagem_C/Engenharia_de_Software/Algoritmos2/MAPA/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Linguagem_C/Engenharia_de_Software/Algoritmos2/MAPA/cmake-build-debug/CMakeFiles/MAPA.dir
-C:/Linguagem_C/Engenharia_de_Software/Algoritmos2/MAPA/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/andrei/Linguagem_C/Engenharia_de_Software/Algoritmos2/MAPA/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/andrei/Linguagem_C/Engenharia_de_Software/Algoritmos2/MAPA/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/andrei/Linguagem_C/Engenharia_de_Software/Algoritmos2/MAPA/cmake-build-debug/CMakeFiles/MAPA.dir

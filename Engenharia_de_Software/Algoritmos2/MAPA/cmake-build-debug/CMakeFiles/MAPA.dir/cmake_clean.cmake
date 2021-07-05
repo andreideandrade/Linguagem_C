@@ -1,9 +1,7 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/MAPA.dir/main.c.obj"
-  "MAPA.exe"
-  "MAPA.exe.manifest"
+  "CMakeFiles/MAPA.dir/main.c.o"
+  "MAPA"
   "MAPA.pdb"
-  "libMAPA.dll.a"
 )
 
 # Per-language clean rules from dependency scanning.

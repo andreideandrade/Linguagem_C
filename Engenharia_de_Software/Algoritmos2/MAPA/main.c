@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
-
+#include <stdbool.h>
 /*  ---------------------------------------  VARIAVEIS   CONSTANTES -------------------------------------------------*/
 const char  INICIO[45] = "\nCadastre seus dados para ser atendido: \n",
             CPF[10] = "\nCPF: ",
@@ -21,19 +21,23 @@ int cadastro(int ent)                                        // FUNÇÃO CADASTR
     switch (ent) {
         case 0:
             printf(CPF);
-            scanf("%s", entCPF);
+            scanf("%s", &entCPF);
+            getchar();
             break;
         case 1:
             printf(NOME);
-            scanf("%s", entNome);
+            scanf("%200[^\n]s", &entNome);  // IMPRIME FRASE INTEIRA
+            getchar();
             break;
         case 2:
             printf(SEXO);
-            scanf("%s", entSexo);
+            scanf("%s", &entSexo);
+            getchar();
             break;
         case 3:
             printf(IDADE);
-            scanf("%s", entIdade);
+            scanf("%s", &entIdade);
+            getchar();
             break;
     }
     return ent;
@@ -58,18 +62,28 @@ int linha()                                                  // Imprime uma linh
 
 int main() {
     setlocale(LC_ALL, "Portuguese");                         //  FORMATA PADRÃO PORTUGUES
-
     linha();
 
-    for (int cad = 0; cad < 4; cad++) {
+/*     ------------------------------------ Cadastro de dados pessoais do paciente ---------------------------------- */
+    for (int cad = 0; cad < 4; cad++)
+    {
         printf(INICIO);
         cadastro(cad);
-
-        limpa();
     }
+
     linha();
 
-    system("pause"); // MANTEM SISTEMA ABERTO ATÉ PRECIONAR QUALQUER TECLA
+//    system("pause");   ( APENAS NO WINDOWS )                  // MANTEM SISTEMA ABERTO ATÉ PRECIONAR QUALQUER TECLA
+
+
+//                                      TESTE DE MESA
+/*     ----------------------------------------------------------------------------------------------------- */
+
+
+
+/*     ----------------------------------------------------------------------------------------------------- */
+
+    getchar();
     return 0;
 }
 /*     ----------------------------------------------------------------------------------------------------- */
