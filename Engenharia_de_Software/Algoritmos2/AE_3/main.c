@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <conio.h>
+//#include <conio.h>
 
+/*  -----------------------------------     VARIAVEIS DO SISTEMA    ----------------------------------------------    */
 int i,
     j,
     lin,
@@ -13,14 +14,15 @@ int i,
     qCartelas,
     nCartelas[200][11];
 
-int limpaTela()                     // LIMPA TELA e TECLADO
+/*  -----------------------------------     LIMPA TELA e TECLADO    ----------------------------------------------    */
+int limpaTela()
 {
     fflush(stdin);
-    system("cls");
+    //system("clear");
     return 0;
 }
-
-int divisao()                      // IMPRIME UMA LINHA PARA DIVISÃO E FORMATAÇÃO NA TABELA
+/*  ---------------------------- IMPRIME UMA LINHA PARA DIVISÃO E FORMATAÇÃO NA TABELA    ------------------------    */
+int divisao()
 {
     for (lin = 0; lin < 51; ++lin) {
         printf("-");
@@ -28,16 +30,16 @@ int divisao()                      // IMPRIME UMA LINHA PARA DIVISÃO E FORMATA�
     printf("\n");
     return 0;
 }
-
-int quantCartelas()                 // ENTRADA DE DADOS - Pergunta quantas cartelas vai ser impresso
+/*  ------------------------ ENTRADA DE DADOS - Pergunta quantas cartelas vai ser impresso    --------------------    */
+int quantCartelas()
 {
     printf("Quantas cartelas deseja imprimir: ");
     scanf("%d", &qCartelas);
     limpaTela();
     return 0;
 }
-
-int populaMatriz()                  // POPULA MATRIZ
+/*  ------------------------------------------     POPULA MATRIZ    ----------------------------------------------    */
+int populaMatriz()
 {
     for (   linha = 0; linha < qCartelas; ++linha)
     {   // for linha
@@ -55,8 +57,8 @@ int populaMatriz()                  // POPULA MATRIZ
     }       //  fim for linha
     return 0;
 }
-
-int corrigeRepetidas()              // CORRIGE REPETIDAS
+/*  --------------------------------------     CORRIGE REPETIDAS    ----------------------------------------------    */
+int corrigeRepetidas()
 {
     for (i = 0; i < qCartelas; ++i)                                         // FOR QUANTIDADE DE CARTELAS
     {
@@ -79,8 +81,8 @@ int corrigeRepetidas()              // CORRIGE REPETIDAS
     }                       // FIM DO FOR QUANTIDADE DE CARTELAS
     return 0;
 }
-
-int imprimeCartelas()               // IMPRIME RESULTADO NA TELA
+/*  ------------------------------     IMPRIME RESULTADO NA TELA    ----------------------------------------------    */
+int imprimeCartelas()
 {
     printf("LISTA DE CARTELAS DO BINGO:\n");
 
@@ -102,8 +104,8 @@ int imprimeCartelas()               // IMPRIME RESULTADO NA TELA
     }
     return 0;
 }
-
-int main()                          // FUNÇÃO PRINCIPAL
+/*  ---------------------------------------     FUNÇÃO PRINCIPAL    ----------------------------------------------    */
+int main()
 {
     srand(time(NULL));              //  CHAMA FUNÇÃO DE TEMPO PARA NÚMEROS ALEATÓRIOS
 
@@ -115,6 +117,7 @@ int main()                          // FUNÇÃO PRINCIPAL
 
     imprimeCartelas();              // IMPRIME RESULTADO NA TELA
 
-    system("pause");
+    //system("pause");
+    getchar();
     return 0;
 }
