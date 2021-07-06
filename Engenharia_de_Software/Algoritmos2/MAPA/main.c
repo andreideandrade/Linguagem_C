@@ -1,42 +1,60 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
-#include <stdbool.h>
-/*  ---------------------------------------  VARIAVEIS   CONSTANTES -------------------------------------------------*/
-const char  INICIO[45] = "\nCadastre seus dados para ser atendido: \n",
-            CPF[10] = "\nCPF: ",
-            NOME[10] = "\nNOME: ",
-            SEXO[10] = "\nSEXO: ",
-            IDADE[10] = "\nIDADE: ";
+/*  -------------------------------  VARIAVEIS   CONSTANTES -------------------------------------------------------   */
+const char  INICIO[45] =        "\nCadastre seus dados para ser atendido: \n",
+            CPF[10] =           "\nCPF: ",
+            NOME[10] =          "\nNOME: ",
+            SEXO[10] =          "\nSEXO: ",
+            IDADE[10] =         "\nIDADE: ",
+            SIMOUNAO[50] =      "\nDigite ( S ) para SIM ou ( N ) para NÃO.\n\t-->\t",
+            PERGUNTA_1[50] =    "Tem Febre? (5 pontos)",
+            PERGUNTA_2[50] =    "Tem dor de cabeça? (1 ponto)",
+            PERGUNTA_3[50] =    "Tem secreção nasal ou espirros? (1 ponto)",
+            PERGUNTA_4[50] =    "Tem dor/irritação na garganta? (1 ponto)",
+            PERGUNTA_5[50] =    "Tem tosse seca? (3 pontos)",
+            PERGUNTA_6[50] =    "Tem dificuldade respiratória? (10 pontos)",
+            PERGUNTA_7[50] =    "Tem dores no corpo? (1 ponto)",
+            PERGUNTA_8[50] =    "Tem diarréia? (1 ponto)",
+            PERGUNTA_9[100] =   "Esteve em contato, nos últimos 14 dias, com um caso diagnosticado com COVID-19? (10 pontos)",
+            PERGUNTA_10[60] =   "Esteve em locais com grande aglomeração? (3 pontos)";
+
+int valores[10] = { 5, 1, 1, 1, 3, 10, 1, 1, 10, 3 },
+    soma = 0,
+    tri;
+
+char decide;
 
 /*  -------------------------------  VARIAVEIS DE ENTRADA DE DADOS DO PACIENTE -------------------------------------  */
-char    entCPF[200],
-        entNome[200],
-        entSexo[200],
-        entIdade[200];
-
-int cadastro(int ent)                                        // FUNÇÃO CADASTRO
+struct cadastro {
+    char    entCPF[200],
+            entNome[200],
+            entSexo[200],
+            entIdade[200];
+};
+/*  -------------------------------  FUNÇÃO CADASTRO ---------------------------------------------------------------  */
+int cadastro(int ent)
 {
-
+    struct cadastro paciente;
     switch (ent) {
         case 0:
             printf(CPF);
-            scanf("%s", &entCPF);
+            scanf("%s", &paciente.entCPF);
             getchar();
             break;
         case 1:
             printf(NOME);
-            scanf("%200[^\n]s", &entNome);  // IMPRIME FRASE INTEIRA
+            scanf("%200[^\n]s", &paciente.entNome);  // IMPRIME FRASE INTEIRA
             getchar();
             break;
         case 2:
             printf(SEXO);
-            scanf("%s", &entSexo);
+            scanf("%s", &paciente.entSexo);
             getchar();
             break;
         case 3:
             printf(IDADE);
-            scanf("%s", &entIdade);
+            scanf("%s", &paciente.entIdade);
             getchar();
             break;
     }
@@ -60,30 +78,110 @@ int linha()                                                  // Imprime uma linh
     return  0;
 }
 
-int main() {
+char resposta()          // Entrada de teclado ( S ) para SIM e ( N ) para NÃO
+{
+
+    if(decide == 's' || decide == 'S')
+    {
+        //printf("\nOk!\n");
+        soma = soma + valores[tri];
+        //getchar();
+    }
+    else if(decide == 'n' || decide == 'N')
+    {
+        //printf("Não deu certo! ");
+        //getchar();
+    }
+    else
+    {
+        printf("%s", SIMOUNAO);
+        scanf("%s", &decide);
+        resposta();
+    }
+}
+
+int triagem(int p){
+
+    switch (p) {
+        case 0:
+            printf("%s %s", PERGUNTA_1, SIMOUNAO);
+            scanf("%s", &decide);
+            resposta(decide);
+            break;
+        case 1:
+            printf("%s %s", PERGUNTA_2, SIMOUNAO);
+            scanf("%s", &decide);
+            resposta(decide);
+            break;
+        case 2:
+            printf("%s %s", PERGUNTA_3, SIMOUNAO);
+            scanf("%s", &decide);
+            resposta(decide);
+            break;
+        case 3:
+            printf("%s %s", PERGUNTA_4, SIMOUNAO);
+            scanf("%s", &decide);
+            resposta(decide);
+            break;
+        case 4:
+            printf("%s %s", PERGUNTA_5, SIMOUNAO);
+            scanf("%s", &decide);
+            resposta(decide);
+            break;
+        case 5:
+            printf("%s %s", PERGUNTA_6, SIMOUNAO);
+            scanf("%s", &decide);
+            resposta(decide);
+            break;
+        case 6:
+            printf("%s %s", PERGUNTA_7, SIMOUNAO);
+            scanf("%s", &decide);
+            resposta(decide);
+            break;
+        case 7:
+            printf("%s %s", PERGUNTA_8, SIMOUNAO);
+            scanf("%s", &decide);
+            resposta(decide);
+            break;
+        case 8:
+            printf("%s %s", PERGUNTA_9, SIMOUNAO);
+            scanf("%s", &decide);
+            resposta(decide);
+            break;
+        case 9:
+            printf("%s %s", PERGUNTA_10, SIMOUNAO);
+            scanf("%s", &decide);
+            resposta(decide);
+            break;
+    }
+}
+int main()
+{
     setlocale(LC_ALL, "Portuguese");                         //  FORMATA PADRÃO PORTUGUES
     linha();
-
 /*     ------------------------------------ Cadastro de dados pessoais do paciente ---------------------------------- */
+    printf(INICIO);
     for (int cad = 0; cad < 4; cad++)
     {
-        printf(INICIO);
         cadastro(cad);
     }
-
+/*     -------------------------------------------------------------------------------------------------------------- */
     linha();
 
-//    system("pause");   ( APENAS NO WINDOWS )                  // MANTEM SISTEMA ABERTO ATÉ PRECIONAR QUALQUER TECLA
-
-
+    for (tri = 0; tri < 11; ++tri)
+    {
+        linha();
+        triagem(tri);
+    }
 //                                      TESTE DE MESA
 /*     ----------------------------------------------------------------------------------------------------- */
 
+    
 
 
-/*     ----------------------------------------------------------------------------------------------------- */
-
+    /*     ----------------------------------------------------------------------------------------------------- */
     getchar();
+//    system("pause");   ( APENAS NO WINDOWS )                  // MANTEM SISTEMA ABERTO ATÉ PRECIONAR QUALQUER TECLA
     return 0;
 }
 /*     ----------------------------------------------------------------------------------------------------- */
@@ -93,9 +191,9 @@ int main() {
  *
  * Após o cadastro o paciente deve responder a um questionário de sintomas no qual cada sintoma terá um
 peso para avaliação do risco de COVID, os sintomas são:
-- Tem Febre? (5 pontos)
-- Tem dor de cabeça? (1 ponto)
-- Tem secreção nasal ou espirros? (1 ponto)
+1 Tem Febre? (5 pontos)
+2 Tem dor de cabeça? (1 ponto)
+3 Tem secreção nasal ou espirros? (1 ponto)
 - Tem dor/irritação na garganta? (1 ponto)
 - Tem tosse seca? (3 pontos)
 - Tem dificuldade respiratória? (10 pontos)
