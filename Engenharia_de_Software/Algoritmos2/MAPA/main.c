@@ -26,39 +26,45 @@ int valores[10] = { 5, 1, 1, 1, 3, 10, 1, 1, 10, 3 },
 char decide;
 
 /*  -------------------------------  VARIAVEIS DE ENTRADA DE DADOS DO PACIENTE -------------------------------------  */
-struct cadastro {
+
+
     char    entCPF[200],
             entNome[200],
             entSexo[200],
             entIdade[200];
-};
+
 /*  -------------------------------  FUNÇÃO CADASTRO ---------------------------------------------------------------  */
+int gravaTxt(char gravaDados[200]);
+
 int cadastro(int ent)
 {
-    struct cadastro paciente;
+
     switch (ent) {
         case 0:
             printf(CPF);
-            scanf("%s", &paciente.entCPF);
+            scanf("%s", &entCPF);
+            gravaTxt(entCPF);
             getchar();
             break;
         case 1:
             printf(NOME);
-            scanf("%200[^\n]s", &paciente.entNome);  // IMPRIME FRASE INTEIRA
+            scanf("%200[^\n]s", &entNome);  // IMPRIME FRASE INTEIRA
+            gravaTxt(entNome);
             getchar();
             break;
         case 2:
             printf(SEXO);
-            scanf("%s", &paciente.entSexo);
+            scanf("%s", &entSexo);
+            gravaTxt(entSexo);
             getchar();
             break;
         case 3:
             printf(IDADE);
-            scanf("%s", &paciente.entIdade);
+            scanf("%s", &entIdade);
+            gravaTxt(entIdade);
             getchar();
             break;
     }
-    return ent;
 }
 
 int limpa()                                                  // Mantem tela e cache limpos
@@ -100,7 +106,8 @@ char resposta()          // Entrada de teclado ( S ) para SIM e ( N ) para NÃO
     }
 }
 
-int triagem(int p){
+int triagem(int p)
+{
 
     switch (p) {
         case 0:
@@ -155,6 +162,9 @@ int triagem(int p){
             break;
     }
 }
+
+
+
 int main()
 {
     setlocale(LC_ALL, "Portuguese");                         //  FORMATA PADRÃO PORTUGUES
@@ -173,22 +183,47 @@ int main()
         triagem(tri);
     }
 /*     ------------------------ Encaminha paciente para a ALA de acordo com sintomas  -------------------------------- */
-if(soma > 19){
-    printf("\nALTO RISCO\n");
-}
-else if(soma > 9){
-    printf("\nMÉDIO RISCO\n");
-}
-else
-{
-    printf("\nBAIXO RISCO\n");
-}
+    if(soma > 19)
+    {
+        printf("\nALTO RISCO\n");
+    }
+    else if(soma > 9)
+    {
+        printf("\nMÉDIO RISCO\n");
+    }
+    else
+    {
+        printf("\nBAIXO RISCO\n");
+    }
+
+
 /*     -------------------------------------------------------------------------------------------------------------- */
     getchar();
 //    system("pause");   ( APENAS NO WINDOWS )                  // MANTEM SISTEMA ABERTO ATÉ PRECIONAR QUALQUER TECLA
     return 0;
 }   // fim do MAIN
 
+int gravaTxt(char gravaDados[200])
+{
+    FILE *ponteiroTXT; // cria um ponteiro para o arquivo
+
+    ponteiroTXT = fopen("Registro.txt", "a");   // ABRE O ARQUIVO
+
+    if(ponteiroTXT == NULL) // TESTE SE O ARQUIVO FOI ABERTO COM SUCESSO.
+    {
+        printf("Erro na abertura do arquivo!");
+        return 1;
+    }
+/*     -------------------------------  CONTEUDO A SER GRAVADO VAI AQUI --------------------------------------------- */
+
+    fprintf(ponteiroTXT, "\n%s", gravaDados);
+    //fputs(gravaDados, ponteiroTXT);
+
+/*     -------------------------------------------------------------------------------------------------------------- */
+    fclose(ponteiroTXT);    // FECHA ARQUIVO
+    printf("Dados gravados com sucesso!");
+
+}
 /*
     Para finalizar deve ser salvo em um arquivo com os dados do paciente e qual sua pontuação de sintomas
     para que seja realizada possíveis auditorias por parte da direção do hospital.
