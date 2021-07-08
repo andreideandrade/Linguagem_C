@@ -1,171 +1,126 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
+#include <string.h>
 /*  -------------------------------  VARIAVEIS   CONSTANTES -------------------------------------------------------   */
 const char  INICIO[45] =        "\nCadastre seus dados para ser atendido: \n",
-            CPF[10] =           "\nCPF: ",
-            NOME[10] =          "\nNOME: ",
-            SEXO[10] =          "\nSEXO: ",
-            IDADE[10] =         "\nIDADE: ",
-            SIMOUNAO[50] =      "\nDigite ( S ) para SIM ou ( N ) para NÃO.\n\t-->\t",
-            PERGUNTA_1[50] =    "Tem Febre? (5 pontos)",
-            PERGUNTA_2[50] =    "Tem dor de cabeça? (1 ponto)",
-            PERGUNTA_3[50] =    "Tem secreção nasal ou espirros? (1 ponto)",
-            PERGUNTA_4[50] =    "Tem dor/irritação na garganta? (1 ponto)",
-            PERGUNTA_5[50] =    "Tem tosse seca? (3 pontos)",
-            PERGUNTA_6[50] =    "Tem dificuldade respiratória? (10 pontos)",
-            PERGUNTA_7[50] =    "Tem dores no corpo? (1 ponto)",
-            PERGUNTA_8[50] =    "Tem diarréia? (1 ponto)",
-            PERGUNTA_9[100] =   "Esteve em contato, nos últimos 14 dias, com um caso diagnosticado com COVID-19? (10 pontos)",
-            PERGUNTA_10[60] =   "Esteve em locais com grande aglomeração? (3 pontos)";
+        SIMOUNAO[53] =      "\nDigite ( S ) para SIM ou ( N ) para NÃO.\n\t-->\t",
+        PERGUNTA_1[22] =    "Tem Febre? (5 pontos)",
+        PERGUNTA_2[30] =    "Tem dor de cabeça? (1 ponto)",
+        PERGUNTA_3[43] =    "Tem secreção nasal ou espirros? (1 ponto)",
+        PERGUNTA_4[42] =    "Tem dor/irritação na garganta? (1 ponto)",
+        PERGUNTA_5[27] =    "Tem tosse seca? (3 pontos)",
+        PERGUNTA_6[42] =    "Tem dificuldade respiratória? (10 pontos)",
+        PERGUNTA_7[30] =    "Tem dores no corpo? (1 ponto)",
+        PERGUNTA_8[24] =    "Tem diarréia? (1 ponto)",
+        PERGUNTA_9[102] =   "Esteve em contato, nos últimos 14 dias, com um caso diagnosticado com COVID-19? (10 pontos)",
+        PERGUNTA_10[53] =   "Esteve em locais com grande aglomeração? (3 pontos)";
+/*  -------------------------------  VARIAVEIS PARA REGISTRO EM ARQUIVO ---------------------------------------------   */
+char    CPF[100] =           "\n\tCPF:    ",
+        NOME[210] =          "\n\tNOME:   ",
+        SEXO[50] =          "\n\tSEXO:   ",
+        IDADE[50] =         "\n\tIDADE:  ",
+        RESULTADO[50]   =    "\n\tPontuação: ",
+        entCPF[20],    // dadosPaciente[0]
+entNome[200],   // dadosPaciente[1]
+entSexo[30],   // dadosPaciente[2]
+entIdade[4],  // dadosPaciente[3]
+decide;
 
 int valores[10] = { 5, 1, 1, 1, 3, 10, 1, 1, 10, 3 },
-    soma = 0,
-    tri;
+        soma = 0,           // dadosPaciente[4]
+tri;
 
-char decide;
-
-/*  -------------------------------  VARIAVEIS DE ENTRADA DE DADOS DO PACIENTE -------------------------------------  */
-
-
-    char    entCPF[200],
-            entNome[200],
-            entSexo[200],
-            entIdade[200];
-
-/*  -------------------------------  FUNÇÃO CADASTRO ---------------------------------------------------------------  */
+/*  -------------------------------  CLONE FUNÇÃO ---------------------------------------------------------------  */
+void limpa();
+void linha();
 int gravaTxt(char gravaDados[200]);
-
+/*  -------------------------------  FUNÇÃO CADASTRO ---------------------------------------------------------------  */
 int cadastro(int ent)
 {
-
     switch (ent) {
         case 0:
             printf(CPF);
             scanf("%s", &entCPF);
-            gravaTxt(entCPF);
             getchar();
             break;
         case 1:
             printf(NOME);
-            scanf("%200[^\n]s", &entNome);  // IMPRIME FRASE INTEIRA
-            gravaTxt(entNome);
+            scanf("%200[^\n]s", &entNome);  // CAPTURA FRASE INTEIRA
             getchar();
             break;
         case 2:
             printf(SEXO);
             scanf("%s", &entSexo);
-            gravaTxt(entSexo);
             getchar();
             break;
         case 3:
             printf(IDADE);
             scanf("%s", &entIdade);
-            gravaTxt(entIdade);
             getchar();
             break;
     }
 }
-
-int limpa()                                                  // Mantem tela e cache limpos
+/*  -------------------------------  FUNÇÃO CONTROLE DE RESPOSTA -----------------------------------------------------  */
+int resposta(char a)          // Entrada de teclado ( S ) para SIM e ( N ) para NÃO
 {
-    fflush(stdin);          // limpa cache
-    system("cls");      // limpa tela
-    return 0;
-}
-
-int linha()                                                  // Imprime uma linha para formatação
-{
-    printf("\n");
-    for (int i = 0; i < 52; i++) {
-        printf("-");
-    }
-    printf("\n");
-    return  0;
-}
-
-char resposta()          // Entrada de teclado ( S ) para SIM e ( N ) para NÃO
-{
-
-    if(decide == 's' || decide == 'S')
+    if(a == 's' || a == 'S')
     {
-        //printf("\nOk!\n");
         soma = soma + valores[tri];
-        //getchar();
     }
-    else if(decide == 'n' || decide == 'N')
-    {
-        //printf("Não deu certo! ");
-        //getchar();
-    }
+    else if(a == 'n' || a == 'N');
     else
     {
         printf("%s", SIMOUNAO);
         scanf("%s", &decide);
-        resposta();
+        resposta(decide);
     }
+    return 0;
 }
-
+/*  -------------------------------  FUNÇÃO TRIAGEM (Perguntas ao paciente) ------------------------------------------  */
 int triagem(int p)
 {
-
     switch (p) {
         case 0:
             printf("%s %s", PERGUNTA_1, SIMOUNAO);
-            scanf("%s", &decide);
-            resposta(decide);
             break;
         case 1:
             printf("%s %s", PERGUNTA_2, SIMOUNAO);
-            scanf("%s", &decide);
-            resposta(decide);
             break;
         case 2:
             printf("%s %s", PERGUNTA_3, SIMOUNAO);
-            scanf("%s", &decide);
-            resposta(decide);
             break;
         case 3:
             printf("%s %s", PERGUNTA_4, SIMOUNAO);
-            scanf("%s", &decide);
-            resposta(decide);
             break;
         case 4:
             printf("%s %s", PERGUNTA_5, SIMOUNAO);
-            scanf("%s", &decide);
-            resposta(decide);
             break;
         case 5:
             printf("%s %s", PERGUNTA_6, SIMOUNAO);
-            scanf("%s", &decide);
-            resposta(decide);
             break;
         case 6:
             printf("%s %s", PERGUNTA_7, SIMOUNAO);
-            scanf("%s", &decide);
-            resposta(decide);
             break;
         case 7:
             printf("%s %s", PERGUNTA_8, SIMOUNAO);
-            scanf("%s", &decide);
-            resposta(decide);
             break;
         case 8:
             printf("%s %s", PERGUNTA_9, SIMOUNAO);
-            scanf("%s", &decide);
-            resposta(decide);
             break;
         case 9:
             printf("%s %s", PERGUNTA_10, SIMOUNAO);
-            scanf("%s", &decide);
-            resposta(decide);
             break;
     }
+    if (p < 10)
+    {
+        scanf("%s", &decide);
+        resposta(decide);
+    }
+    return 0;
 }
 
-
-
-int main()
+void main()
 {
     setlocale(LC_ALL, "Portuguese");                         //  FORMATA PADRÃO PORTUGUES
     linha();
@@ -175,34 +130,45 @@ int main()
     {
         cadastro(cad);
     }
+    limpa();
 /*     ------------------------------------ Triagem para decisão de encaminhamentos --------------------------------- */
     linha();
     for (tri = 0; tri < 11; ++tri)
     {
         linha();
         triagem(tri);
+        limpa();
     }
+
+    gravaTxt("\n|-----------------------------------------------------|\n");
+    gravaTxt( strcat( CPF, entCPF ));
+    gravaTxt( strcat( NOME,   entNome   ));
+    gravaTxt( strcat( SEXO,   entSexo   ));
+    gravaTxt( strcat( IDADE,  entIdade  ));
+
 /*     ------------------------ Encaminha paciente para a ALA de acordo com sintomas  -------------------------------- */
     if(soma > 19)
     {
-        printf("\nALTO RISCO\n");
+        gravaTxt(strcat(RESULTADO,"ALTO RISCO"));
+        printf("\n\n\tDirija-se para a ala de alto risco.");
     }
     else if(soma > 9)
     {
-        printf("\nMÉDIO RISCO\n");
+        gravaTxt(strcat(RESULTADO,"MÉDIO RISCO"));
+        printf("\n\n\tDirija-se para ala de médio risco.");
     }
     else
     {
-        printf("\nBAIXO RISCO\n");
+        gravaTxt(strcat(RESULTADO,"BAIXO RISCO"));
+        printf("\n\n\tDirija-se para ala de baixo risco.");
     }
-
-
-/*     -------------------------------------------------------------------------------------------------------------- */
+    linha();
+    printf("\n\n\tPrecione ENTER para finalizar. ");
     getchar();
-//    system("pause");   ( APENAS NO WINDOWS )                  // MANTEM SISTEMA ABERTO ATÉ PRECIONAR QUALQUER TECLA
-    return 0;
+    limpa();
 }   // fim do MAIN
 
+/*  ---------------------------------   FUNÇÃO CRIA E GRAVA DADOS DA MEMORIA EM ARQUIVO ----------------------------- */
 int gravaTxt(char gravaDados[200])
 {
     FILE *ponteiroTXT; // cria um ponteiro para o arquivo
@@ -214,20 +180,25 @@ int gravaTxt(char gravaDados[200])
         printf("Erro na abertura do arquivo!");
         return 1;
     }
-/*     -------------------------------  CONTEUDO A SER GRAVADO VAI AQUI --------------------------------------------- */
 
-    fprintf(ponteiroTXT, "\n%s", gravaDados);
-    //fputs(gravaDados, ponteiroTXT);
-
-/*     -------------------------------------------------------------------------------------------------------------- */
+/*     -------------------------------  CONTEÚDO A SER GRAVADO VAI AQUI -------------------------------------------   */
+    fputs(gravaDados, ponteiroTXT);
     fclose(ponteiroTXT);    // FECHA ARQUIVO
-    printf("Dados gravados com sucesso!");
-
+    return 0;
 }
-/*
-    Para finalizar deve ser salvo em um arquivo com os dados do paciente e qual sua pontuação de sintomas
-    para que seja realizada possíveis auditorias por parte da direção do hospital.
 
-    função de entrada de dados como o scanf, gets, etc. Isso se dá pois em algumas situações o buffer do
-    teclado mantém “lixo de memória”, prejudicando a próxima operação de entrada do programa;
-  * */
+/*     -------------------------------  Mantem tela e cache limpos -------------------------------------------------   */
+void limpa()
+{
+    fflush(stdin);          // limpa cache
+    system("clear");      // limpa tela
+}
+/*     -------------------------------  Imprime uma linha para formatação -------------------------------------------   */
+void linha()
+{
+    printf("\n");
+    for (int i = 0; i < 52; i++) {
+        printf("-");
+    }
+    printf("\n");
+}
