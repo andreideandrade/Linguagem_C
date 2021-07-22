@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-//#include <conio.h>
 
 /*  ---------------------------------- ESTA FUNÇÃO ABRE E FECHA UM ARQUIVO  ----------------------------------------  */
 int abreArquivo()
@@ -14,14 +13,8 @@ int abreArquivo()
 	// fechando arquivo
 	fclose(pont_arq);
 
-	if (pont_arq == NULL)
-{
-    printf("ERRO! O arquivo não foi aberto!\n");
-}
-else
-   {
-     printf("O arquivo foi aberto com sucesso!");
-   }
+	if (pont_arq == NULL){ printf("ERRO! O arquivo não foi aberto!\n"); }
+    else { printf("O arquivo foi aberto com sucesso!"); }
 
 	getchar();
 	//system("pause");
@@ -41,11 +34,7 @@ int abreEgrava()
 	pont_arq = fopen("arquivo.txt", "a");
 
 	//testando se o arquivo foi realmente criado
-	if(pont_arq == NULL)
-	{
-	printf("Erro na abertura do arquivo!");
-	return 1;
-	}
+	if(pont_arq == NULL){ printf("Erro na abertura do arquivo!"); return 1;	}
 
 	printf("Escreva uma palavra para testar gravacao de arquivo: ");
 	scanf("%s", palavra);
@@ -63,38 +52,27 @@ int abreEgrava()
 }
 
 /*  ---------------------------------- ESTA FUNÇÃO ABRE E GRAVA UMA FRASE NO ARQUIVO  ------------------------------  */
-int gravaFrase()
-{
-FILE *pont_arq;
-   int r;
+int gravaFrase(){
+    FILE *pont_arq;
+    int r;
 
-   pont_arq = fopen("arquivo.txt", "a");
+    pont_arq = fopen("arquivo.txt", "a");
 
-   //Testando a abertura do arquivo
-	if (pont_arq == NULL)
-	{
-		printf("Erro ao tentar abrir o arquivo!");
-		exit(1);
-	}
+    //Testando a abertura do arquivo
+	if (pont_arq == NULL){ printf("Erro ao tentar abrir o arquivo!"); exit(1); }
 
 	//Gravando strings no arquivo
-   r = fputs("Programando em Linguagem C.", pont_arq);
+    r = fputs("Programando em Linguagem C.", pont_arq);
 
-   //Verificando se os dados foram gravados com sucesso
-   if( r == EOF)
-   {
-   	  printf("Erro ao tentar gravar os dados! \n");
-   }
-   else
-	   {
-	   	 printf("Dados gravados com sucesso. \n");
-	   }
+    // Verificando se os dados foram gravados com sucesso
 
-   //fechando o arquivo
-   fclose(pont_arq);
-   return 0;
+    if( r == EOF){ printf("Erro ao tentar gravar os dados! \n"); }
+
+    else { printf("Dados gravados com sucesso. \n"); }
+    //fecha o arquivo
+    fclose(pont_arq);
+    return 0;
 }
-
 /*  -------------------------- ESTA FUNÇÃO FAZ A LEITURA DE UM ARQUIVO E EXIBE NA TELA  ----------------------------  */
 int leituradeArquivo()
 {
@@ -105,28 +83,18 @@ int leituradeArquivo()
 	pont_arq = fopen("arquivo.txt", "r");
 
 	//enquanto não for fim de arquivo o looping será executado
-	//e será impresso o texto
 	while(fgets(texto_str, 60, pont_arq) != NULL)
 	printf("%s", texto_str);
 
-	//fechando o arquivo
+	//fecha o arquivo
 	fclose(pont_arq);
-
-	getchar();
 	return(0);
 }
 
-int main(void)
-{
+int main(void){
     abreArquivo();              // Cria ou se já existe abre e fecha arquivo
     abreEgrava();               // Cria ou se já existe grava palavra em arquivo
     gravaFrase();               // grava uma string inteira no arquivo
     leituradeArquivo();         // Faz a leitura de arquivos txt e exibe na tela
-
-/* ---------------------------------------   BANCADA DE TESTE    --------------------------------------------------   */
-
-
-
-/* ---------------------------------------------    FIM     -------------------------------------------------------   */
     return 0;
 }
